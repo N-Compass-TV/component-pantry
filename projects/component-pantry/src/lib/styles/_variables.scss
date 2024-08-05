@@ -61,23 +61,23 @@ $input-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.05);
 
 // Define base padding and font size
 
-$base-padding-xs: 5px !default;
-$base-padding-sm: 10px !default;
-$base-padding-lg: 20px !default;
-$base-padding-xlg: 30px !default;
-$base-font-size: 14px !default;
+$base-padding-xs: 0.357em;
+$base-padding-sm: 0.714em;
+$base-padding-lg: 1.429em;
+$base-padding-xlg: 2.143em;
+$base-font-size: 1em;
 
 // Font Sizes
-$h1: 40px;
-$h2: 32px;
-$h3: 28px;
-$h4: 24px;
-$h5: 20px;
-$h6: 18px;
-$lg: 16px;
-$md: 14px;
-$sm: 12px;
-$xs: 10px;
+$h1: 2.5rem;
+$h2: 2rem;
+$h3: 1.75rem;
+$h4: 1.5rem;
+$h5: 1.25rem;
+$h6: 1.125rem;
+$lg: 1rem;
+$md: 0.875rem;
+$sm: 0.75rem;
+$xs: 0.625rem;
 
 // Line Height
 $line-height-sm: 24px !default;

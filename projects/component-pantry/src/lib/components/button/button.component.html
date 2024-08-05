@@ -7,10 +7,10 @@
     [attr.type]="buttonActionType()"
 >
     @if (iconLeft()) {
-        <i class="icon-left {{ iconLeft() }}"></i>
+        <img [src]="'data:image/svg+xml;base64,' + iconLeft()" alt="Left icon" class="icon-left" />
     }
     <span>{{ label() }}</span>
     @if (iconRight()) {
-        <i class="icon-right {{ iconRight() }}"></i>
+        <img [src]="'data:image/svg+xml;base64,' + iconRight()" alt="Right icon" class="icon-right" />
     }
 </button>

@@ -8,6 +8,9 @@
     padding: $base-padding-sm $base-padding-lg;
     font-size: $base-font-size;
     transition: 0.2s linear;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
     &--danger {
         background-color: $color-danger;

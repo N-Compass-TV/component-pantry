@@ -12,7 +12,7 @@ import { FontWeights, TextTypes } from './text';
 export class TextComponent {
     /**
      * Specifies the font size of the text. Accepts any valid CSS font-size value.
-     * Example values: '16px', '1em', '1.5rem', etc.
+     * Example values: '1rem', '1.5rem'
      */
     fontSize = input<number>();
 
@@ -41,10 +41,17 @@ export class TextComponent {
     textType = input<TextTypes>('paragraph');
 
     /**
-     * Generates class names based on text type, if values are provided.
-     * Constructs an object suitable for ngClass based on `textType`.
-     * Add more if necessary
-     * @returns {Object} Object with dynamic class names
+     * Specifies the white-space property of the text. Accepts any valid CSS white-space value.
+     * Example values: 'normal', 'nowrap', 'pre', etc.
+     * Default value is 'normal'.
+     */
+    textWrap = input<string>('normal');
+
+    /**
+     * Generates class names based on text type and font weight.
+     * Constructs an object suitable for ngClass based on `textType` and `fontWeight`.
+     * Add more if necessary.
+     * @returns {Object} Object with dynamic class names.
      */
     getClass = computed(() => {
         const classes = {
