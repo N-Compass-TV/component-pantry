@@ -7,7 +7,7 @@
     font-weight: bold;
     padding: $base-padding-sm $base-padding-lg;
     font-size: $base-font-size;
-    transition: 0.2s linear;
+    transition: 0.2s ease-in-out;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -110,5 +110,49 @@
     &--lg {
         padding: $padding-vertical-large $padding-horizontal-large;
         font-size: $font-size-large;
+    }
+
+    .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin: 0 10px;
+
+        &-left {
+            margin-right: 10px;
+            margin-left: 0;
+        }
+
+        &-right {
+            margin-left: 10px;
+            margin-right: 0;
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0px 2px 4px 2px rgb(192, 192, 192);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateX(0);
+        box-shadow: 0 1px 2px 1px rgb(192, 192, 192);
+        transition: 0.05s ease-in-out;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
     }
 }

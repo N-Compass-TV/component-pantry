@@ -3,14 +3,23 @@
     [style.background-color]="backgroundColor()"
     [style.color]="textColor()"
     [ngClass]="getClass()"
-    [disabled]="disabled()"
+    [disabled]="isDisabled()"
     [attr.type]="buttonActionType()"
 >
-    @if (iconLeft()) {
+    @if (loading() && loadingLeft()) {
+        <span class="spinner spinner-left"></span>
+    }
+    @if (loading() && !loadingLeft() && !loadingRight()) {
+        <span class="spinner"></span>
+    }
+    @if (!loading() && iconLeft()) {
         <img [src]="'data:image/svg+xml;base64,' + iconLeft()" alt="Left icon" class="icon-left" />
     }
-    <span>{{ label() }}</span>
-    @if (iconRight()) {
+    <span>{{ loading() ? loadingLabel() : label() }}</span>
+    @if (!loading() && iconRight()) {
         <img [src]="'data:image/svg+xml;base64,' + iconRight()" alt="Right icon" class="icon-right" />
+    }
+    @if (loading() && loadingRight()) {
+        <span class="spinner spinner-right"></span>
     }
 </button>

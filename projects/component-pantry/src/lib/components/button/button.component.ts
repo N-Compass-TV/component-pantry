@@ -59,6 +59,34 @@ export class ButtonComponent {
     buttonActionType = input<ButtonActionTypes>('button');
 
     /**
+     * Indicates whether the button is in a loading state.
+     */
+    loading = input<boolean>(false);
+
+    /**
+     * The text to display when the button is in a loading state.
+     */
+    loadingLabel = input<string>('Loading...');
+
+    /**
+     * Indicates whether to show the loading spinner on the left side.
+     */
+    loadingLeft = input<boolean>(false);
+
+    /**
+     * Indicates whether to show the loading spinner on the right side.
+     */
+    loadingRight = input<boolean>(false);
+
+    /**
+     * Determines whether the button should be disabled.
+     * @returns {boolean} True if the button should be disabled.
+     */
+    isDisabled(): boolean {
+        return this.disabled() || this.loading();
+    }
+
+    /**
      * Generates class names based on button style and size, if values are provided.
      * Constructs an object suitable for ngClass based on `buttonStyle` and `size`.
      * @returns {Object} Object with dynamic class names
