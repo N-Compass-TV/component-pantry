@@ -11,6 +11,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
     styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
+    disabled = input<boolean>(false);
     /**
      * Identifier for the input element.
      */
@@ -52,6 +53,29 @@ export class InputComponent implements OnInit {
      */
     invalidLabel = input<string>('');
 
+    /**
+     * Icon to display on the left side of the input.
+     */
+    /**
+     * Icon to display on the left side of the input.
+     */
+    iconLeft = input<string>('');
+
+    /**
+     * Icon to display on the right side of the input.
+     */
+    iconRight = input<string>('');
+
+    /**
+     * Indicates whether to show the loading spinner on the left side.
+     */
+    loadingLeft = input<boolean>(false);
+
+    /**
+     * Indicates whether to show the loading spinner on the right side.
+     */
+    loadingRight = input<boolean>(false);
+
     ngOnInit(): void {
         this.updateValidators();
     }
@@ -62,6 +86,14 @@ export class InputComponent implements OnInit {
         } else {
             this.control().clearValidators();
         }
+
+        if (this.disabled()) {
+            // Assuming you've added a disabled input signal
+            this.control().disable();
+        } else {
+            this.control().enable();
+        }
+
         this.control().updateValueAndValidity();
     }
 
