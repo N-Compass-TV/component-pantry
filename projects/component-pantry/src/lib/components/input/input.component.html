@@ -6,7 +6,12 @@
         @if (loadingLeft()) {
             <div class="spinner spinner-left"></div>
         } @else if (iconLeft()) {
-            <img [src]="'data:image/svg+xml;base64,' + iconLeft()" alt="Left icon" class="icon-left" />
+            <img
+                [src]="'data:image/svg+xml;base64,' + iconLeft()"
+                alt="Left icon"
+                class="icon-left"
+                [class.disabled]="isDisabled()"
+            />
         }
         <input
             [id]="for()"

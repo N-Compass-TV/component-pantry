@@ -88,7 +88,6 @@ export class InputComponent implements OnInit {
         }
 
         if (this.disabled()) {
-            // Assuming you've added a disabled input signal
             this.control().disable();
         } else {
             this.control().enable();
@@ -113,6 +112,10 @@ export class InputComponent implements OnInit {
      */
     public isInvalid(): boolean {
         return this.control().invalid && this.control().touched;
+    }
+
+    public isDisabled(): boolean {
+        return this.control().disabled;
     }
 
     public shouldShowInvalidLabel(): boolean {

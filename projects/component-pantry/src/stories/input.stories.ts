@@ -130,7 +130,7 @@ const commonArgs = {
 export const Basic: Story = {
     args: {
         ...commonArgs,
-        disabled: true,
+        disabled: false,
         loadingRight: true,
     },
     render: (args) => ({
@@ -149,8 +149,7 @@ export const Basic: Story = {
           [loadingRight]="loadingRight"
           [placeholder]="placeholder"
           [required]="required"
-          [disabled]="disabled"
-          [showInvalidLabel]="showInvalidLabel">
+          [disabled]="disabled">
         </nctv-input>
       </nctv-card>
     `,
