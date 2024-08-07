@@ -18,7 +18,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n    args: {\r\n        inputSize: 'medium',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Search Keyword',\r\n        autocompleteData: dummyDataCountry,\r\n        leftIconSvg: `<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20px\">\r\n            <path d=\"M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\r\n        </svg>`,\r\n        rightIconSvg: `<svg width=\"15\" viewBox=\"0 0 18 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n        <path\r\n          clip-rule=\"evenodd\"\r\n          d=\"M9.53033 9.28033C9.23744 9.57322 8.76256 9.57322 8.46967 9.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.719671C1.26256 0.426777 1.73744 0.426777 2.03033 0.719671L9 7.68934L15.9697 0.71967C16.2626 0.426777 16.7374 0.426777 17.0303 0.71967C17.3232 1.01256 17.3232 1.48744 17.0303 1.78033L9.53033 9.28033Z\"\r\n        >\r\n        </path>\r\n      </svg>`,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [cardSize]=\"'100%'\">\r\n                <nctv-autocomplete\r\n                    [inputSize]=\"inputSize\"\r\n                    [label]=\"label\"\r\n                    [placeholder]=\"placeholder\"\r\n                    [autocompleteData]=\"autocompleteData\"\r\n                    [leftIconSvg]=\"leftIconSvg\"\r\n                    [rightIconSvg]=\"rightIconSvg\"\r\n                >\r\n                </nctv-autocomplete>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        options: dummyDataCountry,\r\n        placeholder: 'Search country',\r\n        label: 'Country',\r\n    },\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            onOptionSelected: (option: any) => console.log('Selected:', option),\r\n            onInputChanged: (value: string) => console.log('Input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-autocomplete\r\n        [options]=\"options\"\r\n        [placeholder]=\"placeholder\"\r\n        [label]=\"label\"\r\n        (optionSelected)=\"onOptionSelected($event)\"\r\n        (inputChanged)=\"onInputChanged($event)\"\r\n      ></nctv-autocomplete>\r\n    `,\r\n    }),\r\n}"
             },
             {
                 "name": "Basic",
@@ -38,7 +38,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n        cardWidth: 'auto',\r\n        cardHeight: 'auto',\r\n        sidePadding: 1,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [cardWidth]=\"cardWidth\" [cardHeight]=\"cardHeight\" [sidePadding]=\"sidePadding\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
             },
             {
                 "name": "Basic",
@@ -118,7 +118,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 5,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [sidePadding]=\"50\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\"\r\n                    [textType]=\"'paragraph'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 5,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [sidePadding]=\"4\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\"\r\n                    [textType]=\"'paragraph'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
             },
             {
                 "name": "Danger",
@@ -129,16 +129,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n    args: {\r\n        label: 'Delete',\r\n        buttonStyle: 'danger',\r\n    },\r\n}"
-            },
-            {
-                "name": "DemoAutocomplete",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/component-pantry/src/stories/autocomplete.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n    args: {\r\n        inputSize: 'medium',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Autocomplete Field Placeholder (Dynamic)',\r\n        autocompleteData: dummyDataCountry,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\">\r\n              <div style=\"display: flex; gap: 20px;\">\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" style=\"width: 100%;\" [placeholder]=\"placeholder\" [autocompleteData]=\"autocompleteData\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" style=\"width: 100%;\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n              </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
             },
             {
                 "name": "Disabled",
@@ -168,7 +158,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n    { id: 'abc123', name: 'Afghanistan', code: 'AF' },\r\n    { id: 'def456', name: 'Åland Islands', code: 'AX' },\r\n    { id: 'ghi789', name: 'Albania', code: 'AL' },\r\n    { id: 'jkl012', name: 'Algeria', code: 'DZ' },\r\n    { id: 'mno345', name: 'American Samoa', code: 'AS' },\r\n    { id: 'pqr678', name: 'AndorrA', code: 'AD' },\r\n]"
+                "defaultValue": "[\r\n    { id: 'AF', label: 'Afghanistan', value: 'AF' },\r\n    { id: 'AX', label: 'Åland Islands', value: 'AX' },\r\n    { id: 'AL', label: 'Albania', value: 'AL' },\r\n    { id: 'DZ', label: 'Algeria', value: 'DZ' },\r\n    { id: 'AS', label: 'American Samoa', value: 'AS' },\r\n    { id: 'AD', label: 'Andorra', value: 'AD' },\r\n]"
             },
             {
                 "name": "Ellipsis",
@@ -268,7 +258,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AutocompleteComponent>",
-                "defaultValue": "{\r\n    title: 'Components/Autocomplete',\r\n    component: AutocompleteComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, CardComponent, InputComponent, ButtonComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        inputSize: {\r\n            control: 'select',\r\n            description: 'Used to set input size.',\r\n            options: AUTOCOMPLETE_INPUT_SIZE,\r\n            table: {\r\n                defaultValue: {\r\n                    summary: 'medium',\r\n                },\r\n            },\r\n        },\r\n        leftIconSvg: {\r\n            control: {\r\n                type: 'text', // Use the 'text' control for SVG input\r\n                // Optional, but recommended for a better UX:\r\n                labels: {\r\n                    control: 'Left Icon SVG',\r\n                    description: 'Input the SVG code for the left icon.',\r\n                },\r\n            },\r\n        },\r\n        rightIconSvg: {\r\n            control: {\r\n                type: 'text',\r\n                // Optional labels for better UX:\r\n                labels: {\r\n                    control: 'Right Icon SVG',\r\n                    description: 'Input the SVG code for the right icon.',\r\n                },\r\n            },\r\n        },\r\n    },\r\n}"
+                "defaultValue": "{\r\n    title: 'Components/Autocomplete',\r\n    component: AutocompleteComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ReactiveFormsModule, InputComponent, CardComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        options: {\r\n            control: 'object',\r\n            description: 'Array of option objects for autocomplete',\r\n        },\r\n        placeholder: {\r\n            control: 'text',\r\n            description: 'Placeholder text for the input',\r\n        },\r\n        label: {\r\n            control: 'text',\r\n            description: 'Label for the autocomplete input',\r\n        },\r\n    },\r\n}"
             },
             {
                 "name": "meta",
@@ -298,7 +288,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CardComponent>",
-                "defaultValue": "{\r\n    title: 'Components/Card',\r\n    component: CardComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ButtonComponent, TextComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        shadowLevel: {\r\n            control: 'select',\r\n            description: 'Used to set shadow level, the higher the value the more prominent the shadow is.',\r\n            options: CARD_SHADOWS,\r\n        },\r\n        backgroundColor: {\r\n            control: 'color',\r\n            description: 'Sets the background color of the card.',\r\n        },\r\n        cardSize: {\r\n            control: 'select',\r\n            description: 'Sets the side size of the card.',\r\n            options: CARD_SIZE,\r\n        },\r\n    },\r\n}"
+                "defaultValue": "{\r\n    title: 'Components/Card',\r\n    component: CardComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ButtonComponent, TextComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        shadowLevel: {\r\n            control: 'select',\r\n            description: 'Used to set shadow level, the higher the value the more prominent the shadow is.',\r\n            options: CARD_SHADOWS,\r\n        },\r\n        backgroundColor: {\r\n            control: 'color',\r\n            description: 'Sets the background color of the card.',\r\n        },\r\n        sidePadding: {\r\n            control: 'number',\r\n            description: 'Sets the padding on all sides of the card in rem units.',\r\n            table: {\r\n                type: { summary: 'number' },\r\n            },\r\n        },\r\n        cardWidth: {\r\n            control: { type: 'text' },\r\n            description:\r\n                'Sets the width of the card. Can be \"auto\", \"fit-content\", \"full\", or a specific value (e.g., \"200px\", \"50%\").',\r\n        },\r\n        cardHeight: {\r\n            control: { type: 'text' },\r\n            description:\r\n                'Sets the height of the card. Can be \"auto\", \"fit-content\", \"full\", or a specific value (e.g., \"200px\", \"50%\").',\r\n        },\r\n    },\r\n}"
             },
             {
                 "name": "meta",
@@ -348,7 +338,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n    args: {\r\n        inputSize: 'small',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Autocomplete Field Placeholder (Dynamic)',\r\n        autocompleteData: dummyDataCountry,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n        <nctv-card [shadowLevel]=\"shadowLevel\">\r\n            <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;\">\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"label\" [placeholder]=\"placeholder\" [autocompleteData]=\"autocompleteData\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-input [label]=\"label\" [inputSize]=\"inputSize\" [placeholder]=\"placeholder\"></nctv-input>\r\n\r\n                <nctv-input [label]=\"'I am a label (Static)'\" [inputSize]=\"inputSize\" [placeholder]=\"'I am a placeholder (Static)'\"></nctv-input>\r\n\r\n                <nctv-input [label]=\"label\" [inputSize]=\"inputSize\" [placeholder]=\"placeholder\"></nctv-input>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-input [label]=\"'I am a label (Static)'\" [inputSize]=\"inputSize\" [placeholder]=\"'I am a placeholder (Static)'\"></nctv-input>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n            </div>\r\n        </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                "defaultValue": "{\r\n    args: {},\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            countryOptions: dummyDataCountry,\r\n            animalOptions: [\r\n                { id: '1', label: 'Lion', value: 'lion' },\r\n                { id: '2', label: 'Tiger', value: 'tiger' },\r\n                { id: '3', label: 'Elephant', value: 'elephant' },\r\n                { id: '4', label: 'Giraffe', value: 'giraffe' },\r\n                { id: '5', label: 'Zebra', value: 'zebra' },\r\n            ],\r\n            onCountrySelected: (option: any) => console.log('Country selected:', option),\r\n            onAnimalSelected: (option: any) => console.log('Animal selected:', option),\r\n            onCountryInputChanged: (value: string) => console.log('Country input changed:', value),\r\n            onAnimalInputChanged: (value: string) => console.log('Animal input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-card [shadowLevel]=\"2\">\r\n        <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;\">\r\n          <nctv-autocomplete\r\n            [options]=\"countryOptions\"\r\n            placeholder=\"Search country\"\r\n            label=\"Country\"\r\n            (optionSelected)=\"onCountrySelected($event)\"\r\n            (inputChanged)=\"onCountryInputChanged($event)\"\r\n          ></nctv-autocomplete>\r\n\r\n          <nctv-autocomplete\r\n            [options]=\"animalOptions\"\r\n            placeholder=\"Search animal\"\r\n            label=\"Animal\"\r\n            (optionSelected)=\"onAnimalSelected($event)\"\r\n            (inputChanged)=\"onAnimalInputChanged($event)\"\r\n          ></nctv-autocomplete>\r\n        </div>\r\n      </nctv-card>\r\n    `,\r\n    }),\r\n}"
             },
             {
                 "name": "Paragraph",
@@ -391,6 +381,16 @@
                 "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 3,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
             },
             {
+                "name": "SpecificHeightCard",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/component-pantry/src/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n        cardWidth: 'auto',\r\n        cardHeight: '200px',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [cardWidth]=\"cardWidth\" [cardHeight]=\"cardHeight\">\r\n                <div style=\"height: 100%; display: flex; align-items: center; justify-content: center;\">\r\n                    <nctv-text [textContent]=\"'This card is 200px tall'\"></nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+            },
+            {
                 "name": "Success",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -409,6 +409,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n    args: {\r\n        orientation: 'vertical',\r\n        showSteps: true,\r\n        steps: [\r\n            { label: 'Create Screen', completed: false },\r\n            { label: 'Choose Template', completed: true },\r\n            { label: 'Assign Playlist', completed: false },\r\n        ],\r\n        currentStep: 0,\r\n    },\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            onNext: () => {\r\n                if (args.currentStep < args.steps.length - 1) {\r\n                    args.currentStep += 1;\r\n                }\r\n            },\r\n            onBack: () => {\r\n                if (args.currentStep > 0) {\r\n                    args.currentStep -= 1;\r\n                }\r\n            },\r\n        },\r\n        template: `\r\n        <div style=\"height: 500px;\">\r\n        <nctv-card [cardSize]=\"'fit-content'\" [backgroundColor]=\"'#091635'\">\r\n            <div style=\"display: flex; gap: 10px; height: 100%; flex-direction: column; align-items:center;\">\r\n                \r\n\r\n                <div style=\"height: 100%;\">\r\n                    <nctv-stepper\r\n                        [steps]=\"steps\"\r\n                        [showSteps]=\"showSteps\"\r\n                        [(currentStep)]=\"currentStep\"\r\n                        (finished)=\"onFinish()\"\r\n                        [orientation]=\"orientation\">\r\n                    </nctv-stepper>\r\n                </div>\r\n            </div>\r\n        </nctv-card>\r\n    </div>\r\n        `,\r\n    }),\r\n}"
+            },
+            {
+                "name": "WithCard",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/component-pantry/src/stories/autocomplete.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    args: {\r\n        options: dummyDataCountry,\r\n        placeholder: 'Search country',\r\n        label: 'Country',\r\n    },\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            onOptionSelected: (option: any) => console.log('Selected:', option),\r\n            onInputChanged: (value: string) => console.log('Input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-card [shadowLevel]=\"2\" [cardSize]=\"'100%'\">\r\n        <nctv-autocomplete\r\n          [options]=\"options\"\r\n          [placeholder]=\"placeholder\"\r\n          [label]=\"label\"\r\n          (optionSelected)=\"onOptionSelected($event)\"\r\n          (inputChanged)=\"onInputChanged($event)\"\r\n        ></nctv-autocomplete>\r\n      </nctv-card>\r\n    `,\r\n    }),\r\n}"
             },
             {
                 "name": "Wrap",
@@ -523,17 +533,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n    args: {\r\n        inputSize: 'medium',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Search Keyword',\r\n        autocompleteData: dummyDataCountry,\r\n        leftIconSvg: `<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" width=\"20px\">\r\n            <path d=\"M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\r\n        </svg>`,\r\n        rightIconSvg: `<svg width=\"15\" viewBox=\"0 0 18 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n        <path\r\n          clip-rule=\"evenodd\"\r\n          d=\"M9.53033 9.28033C9.23744 9.57322 8.76256 9.57322 8.46967 9.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.719671C1.26256 0.426777 1.73744 0.426777 2.03033 0.719671L9 7.68934L15.9697 0.71967C16.2626 0.426777 16.7374 0.426777 17.0303 0.71967C17.3232 1.01256 17.3232 1.48744 17.0303 1.78033L9.53033 9.28033Z\"\r\n        >\r\n        </path>\r\n      </svg>`,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [cardSize]=\"'100%'\">\r\n                <nctv-autocomplete\r\n                    [inputSize]=\"inputSize\"\r\n                    [label]=\"label\"\r\n                    [placeholder]=\"placeholder\"\r\n                    [autocompleteData]=\"autocompleteData\"\r\n                    [leftIconSvg]=\"leftIconSvg\"\r\n                    [rightIconSvg]=\"rightIconSvg\"\r\n                >\r\n                </nctv-autocomplete>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
-                },
-                {
-                    "name": "DemoAutocomplete",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/component-pantry/src/stories/autocomplete.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n    args: {\r\n        inputSize: 'medium',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Autocomplete Field Placeholder (Dynamic)',\r\n        autocompleteData: dummyDataCountry,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\">\r\n              <div style=\"display: flex; gap: 20px;\">\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" style=\"width: 100%;\" [placeholder]=\"placeholder\" [autocompleteData]=\"autocompleteData\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" style=\"width: 100%;\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n              </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        options: dummyDataCountry,\r\n        placeholder: 'Search country',\r\n        label: 'Country',\r\n    },\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            onOptionSelected: (option: any) => console.log('Selected:', option),\r\n            onInputChanged: (value: string) => console.log('Input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-autocomplete\r\n        [options]=\"options\"\r\n        [placeholder]=\"placeholder\"\r\n        [label]=\"label\"\r\n        (optionSelected)=\"onOptionSelected($event)\"\r\n        (inputChanged)=\"onInputChanged($event)\"\r\n      ></nctv-autocomplete>\r\n    `,\r\n    }),\r\n}"
                 },
                 {
                     "name": "dummyDataCountry",
@@ -543,7 +543,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n    { id: 'abc123', name: 'Afghanistan', code: 'AF' },\r\n    { id: 'def456', name: 'Åland Islands', code: 'AX' },\r\n    { id: 'ghi789', name: 'Albania', code: 'AL' },\r\n    { id: 'jkl012', name: 'Algeria', code: 'DZ' },\r\n    { id: 'mno345', name: 'American Samoa', code: 'AS' },\r\n    { id: 'pqr678', name: 'AndorrA', code: 'AD' },\r\n]"
+                    "defaultValue": "[\r\n    { id: 'AF', label: 'Afghanistan', value: 'AF' },\r\n    { id: 'AX', label: 'Åland Islands', value: 'AX' },\r\n    { id: 'AL', label: 'Albania', value: 'AL' },\r\n    { id: 'DZ', label: 'Algeria', value: 'DZ' },\r\n    { id: 'AS', label: 'American Samoa', value: 'AS' },\r\n    { id: 'AD', label: 'Andorra', value: 'AD' },\r\n]"
                 },
                 {
                     "name": "meta",
@@ -553,7 +553,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AutocompleteComponent>",
-                    "defaultValue": "{\r\n    title: 'Components/Autocomplete',\r\n    component: AutocompleteComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, CardComponent, InputComponent, ButtonComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        inputSize: {\r\n            control: 'select',\r\n            description: 'Used to set input size.',\r\n            options: AUTOCOMPLETE_INPUT_SIZE,\r\n            table: {\r\n                defaultValue: {\r\n                    summary: 'medium',\r\n                },\r\n            },\r\n        },\r\n        leftIconSvg: {\r\n            control: {\r\n                type: 'text', // Use the 'text' control for SVG input\r\n                // Optional, but recommended for a better UX:\r\n                labels: {\r\n                    control: 'Left Icon SVG',\r\n                    description: 'Input the SVG code for the left icon.',\r\n                },\r\n            },\r\n        },\r\n        rightIconSvg: {\r\n            control: {\r\n                type: 'text',\r\n                // Optional labels for better UX:\r\n                labels: {\r\n                    control: 'Right Icon SVG',\r\n                    description: 'Input the SVG code for the right icon.',\r\n                },\r\n            },\r\n        },\r\n    },\r\n}"
+                    "defaultValue": "{\r\n    title: 'Components/Autocomplete',\r\n    component: AutocompleteComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ReactiveFormsModule, InputComponent, CardComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        options: {\r\n            control: 'object',\r\n            description: 'Array of option objects for autocomplete',\r\n        },\r\n        placeholder: {\r\n            control: 'text',\r\n            description: 'Placeholder text for the input',\r\n        },\r\n        label: {\r\n            control: 'text',\r\n            description: 'Label for the autocomplete input',\r\n        },\r\n    },\r\n}"
                 },
                 {
                     "name": "MultipleAutocomplete",
@@ -563,7 +563,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n    args: {\r\n        inputSize: 'small',\r\n        label: 'Autocomplete Field (Dynamic)',\r\n        placeholder: 'Autocomplete Field Placeholder (Dynamic)',\r\n        autocompleteData: dummyDataCountry,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n        <nctv-card [shadowLevel]=\"shadowLevel\">\r\n            <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;\">\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"label\" [placeholder]=\"placeholder\" [autocompleteData]=\"autocompleteData\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-input [label]=\"label\" [inputSize]=\"inputSize\" [placeholder]=\"placeholder\"></nctv-input>\r\n\r\n                <nctv-input [label]=\"'I am a label (Static)'\" [inputSize]=\"inputSize\" [placeholder]=\"'I am a placeholder (Static)'\"></nctv-input>\r\n\r\n                <nctv-input [label]=\"label\" [inputSize]=\"inputSize\" [placeholder]=\"placeholder\"></nctv-input>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n\r\n                <nctv-input [label]=\"'I am a label (Static)'\" [inputSize]=\"inputSize\" [placeholder]=\"'I am a placeholder (Static)'\"></nctv-input>\r\n\r\n                <nctv-autocomplete [inputSize]=\"inputSize\" [label]=\"'Second autocomplete (Static)'\" [placeholder]=\"'Select animal (Static)'\" [autocompleteData]=\"[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]\">\r\n                </nctv-autocomplete>\r\n            </div>\r\n        </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                    "defaultValue": "{\r\n    args: {},\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            countryOptions: dummyDataCountry,\r\n            animalOptions: [\r\n                { id: '1', label: 'Lion', value: 'lion' },\r\n                { id: '2', label: 'Tiger', value: 'tiger' },\r\n                { id: '3', label: 'Elephant', value: 'elephant' },\r\n                { id: '4', label: 'Giraffe', value: 'giraffe' },\r\n                { id: '5', label: 'Zebra', value: 'zebra' },\r\n            ],\r\n            onCountrySelected: (option: any) => console.log('Country selected:', option),\r\n            onAnimalSelected: (option: any) => console.log('Animal selected:', option),\r\n            onCountryInputChanged: (value: string) => console.log('Country input changed:', value),\r\n            onAnimalInputChanged: (value: string) => console.log('Animal input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-card [shadowLevel]=\"2\">\r\n        <div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;\">\r\n          <nctv-autocomplete\r\n            [options]=\"countryOptions\"\r\n            placeholder=\"Search country\"\r\n            label=\"Country\"\r\n            (optionSelected)=\"onCountrySelected($event)\"\r\n            (inputChanged)=\"onCountryInputChanged($event)\"\r\n          ></nctv-autocomplete>\r\n\r\n          <nctv-autocomplete\r\n            [options]=\"animalOptions\"\r\n            placeholder=\"Search animal\"\r\n            label=\"Animal\"\r\n            (optionSelected)=\"onAnimalSelected($event)\"\r\n            (inputChanged)=\"onAnimalInputChanged($event)\"\r\n          ></nctv-autocomplete>\r\n        </div>\r\n      </nctv-card>\r\n    `,\r\n    }),\r\n}"
+                },
+                {
+                    "name": "WithCard",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/component-pantry/src/stories/autocomplete.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    args: {\r\n        options: dummyDataCountry,\r\n        placeholder: 'Search country',\r\n        label: 'Country',\r\n    },\r\n    render: (args) => ({\r\n        props: {\r\n            ...args,\r\n            onOptionSelected: (option: any) => console.log('Selected:', option),\r\n            onInputChanged: (value: string) => console.log('Input changed:', value),\r\n        },\r\n        template: `\r\n      <nctv-card [shadowLevel]=\"2\" [cardSize]=\"'100%'\">\r\n        <nctv-autocomplete\r\n          [options]=\"options\"\r\n          [placeholder]=\"placeholder\"\r\n          [label]=\"label\"\r\n          (optionSelected)=\"onOptionSelected($event)\"\r\n          (inputChanged)=\"onInputChanged($event)\"\r\n        ></nctv-autocomplete>\r\n      </nctv-card>\r\n    `,\r\n    }),\r\n}"
                 }
             ],
             "projects/component-pantry/src/stories/calendar.stories.ts": [
@@ -597,7 +607,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n        cardWidth: 'auto',\r\n        cardHeight: 'auto',\r\n        sidePadding: 1,\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [cardWidth]=\"cardWidth\" [cardHeight]=\"cardHeight\" [sidePadding]=\"sidePadding\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
                 },
                 {
                     "name": "CustomBackground",
@@ -617,7 +627,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 5,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [sidePadding]=\"50\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\"\r\n                    [textType]=\"'paragraph'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 5,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [sidePadding]=\"4\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\"\r\n                    [textType]=\"'paragraph'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -627,7 +637,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CardComponent>",
-                    "defaultValue": "{\r\n    title: 'Components/Card',\r\n    component: CardComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ButtonComponent, TextComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        shadowLevel: {\r\n            control: 'select',\r\n            description: 'Used to set shadow level, the higher the value the more prominent the shadow is.',\r\n            options: CARD_SHADOWS,\r\n        },\r\n        backgroundColor: {\r\n            control: 'color',\r\n            description: 'Sets the background color of the card.',\r\n        },\r\n        cardSize: {\r\n            control: 'select',\r\n            description: 'Sets the side size of the card.',\r\n            options: CARD_SIZE,\r\n        },\r\n    },\r\n}"
+                    "defaultValue": "{\r\n    title: 'Components/Card',\r\n    component: CardComponent,\r\n    decorators: [\r\n        moduleMetadata({\r\n            imports: [CommonModule, ButtonComponent, TextComponent],\r\n        }),\r\n    ],\r\n    tags: ['autodocs'],\r\n    parameters: {},\r\n    argTypes: {\r\n        shadowLevel: {\r\n            control: 'select',\r\n            description: 'Used to set shadow level, the higher the value the more prominent the shadow is.',\r\n            options: CARD_SHADOWS,\r\n        },\r\n        backgroundColor: {\r\n            control: 'color',\r\n            description: 'Sets the background color of the card.',\r\n        },\r\n        sidePadding: {\r\n            control: 'number',\r\n            description: 'Sets the padding on all sides of the card in rem units.',\r\n            table: {\r\n                type: { summary: 'number' },\r\n            },\r\n        },\r\n        cardWidth: {\r\n            control: { type: 'text' },\r\n            description:\r\n                'Sets the width of the card. Can be \"auto\", \"fit-content\", \"full\", or a specific value (e.g., \"200px\", \"50%\").',\r\n        },\r\n        cardHeight: {\r\n            control: { type: 'text' },\r\n            description:\r\n                'Sets the height of the card. Can be \"auto\", \"fit-content\", \"full\", or a specific value (e.g., \"200px\", \"50%\").',\r\n        },\r\n    },\r\n}"
                 },
                 {
                     "name": "ShadowLevel3",
@@ -638,6 +648,16 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 3,\r\n        backgroundColor: '#fff',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\">\r\n                <div [style.margin-bottom.px]=\"'20'\">\r\n                    <nctv-text\r\n                    [textType]=\"'larger'\"\r\n                    [textContent]=\"'Hello World!'\">\r\n                    </nctv-text>\r\n                </div>\r\n\r\n                <div>\r\n                    <nctv-text\r\n                    [textContent]=\"'Lorem ipsum keme keme keme 48 years chaka at bakit na ugmas mabaho nang kasi balaj sa na pranella jupang-pang shontis chapter jowabella at ang chaka at nang guash matod kasi nakakalurky na ang neuro na warla nang ugmas wasok nang shonget ang chapter , kemerloo ang shontis ng at ang intonses at nang wasok oblation sa nang 48 years shontis at bakit mahogany bongga.'\">\r\n                    </nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
+                },
+                {
+                    "name": "SpecificHeightCard",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/component-pantry/src/stories/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    args: {\r\n        shadowLevel: 1,\r\n        backgroundColor: '#fff',\r\n        cardWidth: 'auto',\r\n        cardHeight: '200px',\r\n    },\r\n    render: (args) => ({\r\n        props: args,\r\n        template: `\r\n            <nctv-card [shadowLevel]=\"shadowLevel\" [backgroundColor]=\"backgroundColor\" [cardWidth]=\"cardWidth\" [cardHeight]=\"cardHeight\">\r\n                <div style=\"height: 100%; display: flex; align-items: center; justify-content: center;\">\r\n                    <nctv-text [textContent]=\"'This card is 200px tall'\"></nctv-text>\r\n                </div>\r\n            </nctv-card>\r\n        `,\r\n    }),\r\n}"
                 }
             ],
             "projects/component-pantry/src/stories/input.stories.ts": [
@@ -1082,16 +1102,6 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "DemoAutocomplete",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/component-pantry/src/stories/autocomplete.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
                 "name": "dummyDataCountry",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -1113,6 +1123,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "MultipleAutocomplete",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/component-pantry/src/stories/autocomplete.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithCard",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1253,6 +1273,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "ShadowLevel3",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/component-pantry/src/stories/card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SpecificHeightCard",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

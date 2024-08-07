@@ -26,7 +26,8 @@
         position: relative;
         gap: $base-padding-xs;
 
-        .icon-left {
+        .icon-left,
+        .icon-right {
             transition: filter 0.3s ease;
             filter: grayscale(100%);
         }
@@ -35,7 +36,8 @@
             border-color: $color-secondary;
             color: $color-secondary;
 
-            .icon-left {
+            .icon-left,
+            .icon-right {
                 filter: grayscale(0%);
             }
         }

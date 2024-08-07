@@ -23,7 +23,12 @@
         @if (loadingRight()) {
             <div class="spinner spinner-right"></div>
         } @else if (iconRight()) {
-            <img [src]="'data:image/svg+xml;base64,' + iconRight()" alt="Right icon" class="icon-right" />
+            <img
+                [src]="'data:image/svg+xml;base64,' + iconRight()"
+                alt="Right icon"
+                class="icon-right"
+                [class.disabled]="isDisabled()"
+            />
         }
     </div>
     @if (shouldShowInvalidLabel()) {
