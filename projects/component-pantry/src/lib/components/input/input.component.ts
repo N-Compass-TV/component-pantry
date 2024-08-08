@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, InputSignal, OnInit } from '@angular/core';
+import { Component, computed, effect, InputSignal, OnInit, output } from '@angular/core';
 import { input } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import { InputSize, InputType } from './input';
 @Component({
     selector: 'nctv-input',
     standalone: true,
@@ -12,6 +12,8 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 })
 export class InputComponent implements OnInit {
     disabled = input<boolean>(false);
+    rotating = input<boolean>(false);
+
     /**
      * Identifier for the input element.
      */
@@ -30,12 +32,12 @@ export class InputComponent implements OnInit {
     /**
      * Size of the input element (e.g., small, medium, large).
      */
-    inputSize = input<string>('medium');
+    inputSize = input<InputSize>('medium');
 
     /**
      * Input type (e.g., text, password, email).
      */
-    inputType = input<string>('text');
+    inputType = input<InputType>('text');
 
     /**
      * Indicates whether the input is required.
@@ -76,8 +78,26 @@ export class InputComponent implements OnInit {
      */
     loadingRight = input<boolean>(false);
 
+    // New output events for focus and blur
+    focused = output<void>();
+    blurred = output<void>();
+
+    onFocus() {
+        this.focused.emit();
+    }
+
+    onBlur() {
+        this.blurred.emit();
+    }
+
     ngOnInit(): void {
         this.updateValidators();
+    }
+
+    constructor() {
+        effect(() => {
+            this.updateValidators();
+        });
     }
 
     private updateValidators(): void {
@@ -110,15 +130,11 @@ export class InputComponent implements OnInit {
      * Checks if the input is invalid.
      * @returns {boolean} True if the input is invalid, otherwise false.
      */
-    public isInvalid(): boolean {
-        return this.control().invalid && this.control().touched;
-    }
+    isInvalid = computed(() => this.control().invalid && this.control().touched);
 
     public isDisabled(): boolean {
         return this.control().disabled;
     }
 
-    public shouldShowInvalidLabel(): boolean {
-        return this.isInvalid() && this.invalidLabel().length > 0;
-    }
+    shouldShowInvalidLabel = computed(() => this.isInvalid() && this.invalidLabel().length > 0);
 }

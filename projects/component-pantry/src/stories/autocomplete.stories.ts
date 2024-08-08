@@ -28,6 +28,18 @@ const meta: Meta<AutocompleteComponent> = {
             control: 'text',
             description: 'Label for the autocomplete input',
         },
+        rotating: {
+            control: 'boolean',
+            description: 'Enables rotating animation for the right-icon (For dropdown)',
+        },
+        iconLeft: {
+            control: 'text',
+            description: 'Base64 encoded SVG for the left icon.',
+        },
+        iconRight: {
+            control: 'text',
+            description: 'Base64 encoded SVG for the right icon.',
+        },
     },
 };
 
@@ -48,6 +60,9 @@ export const Basic: Story = {
         options: dummyDataCountry,
         placeholder: 'Search country',
         label: 'Country',
+        iconLeft:
+            'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBzdHJva2U9IiM4RENCMkMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Im0xOSAxOS01LjE5Ny01LjE5N20wIDBBNy41IDcuNSAwIDEgMCAzLjE5NiAzLjE5NmE3LjUgNy41IDAgMCAwIDEwLjYwNyAxMC42MDdaIi8+PC9zdmc+',
+        rotating: true,
     },
     render: (args) => ({
         props: {
@@ -60,6 +75,8 @@ export const Basic: Story = {
         [options]="options"
         [placeholder]="placeholder"
         [label]="label"
+        [rotating]="rotating"
+        [iconLeft]="iconLeft"
         (optionSelected)="onOptionSelected($event)"
         (inputChanged)="onInputChanged($event)"
       ></nctv-autocomplete>

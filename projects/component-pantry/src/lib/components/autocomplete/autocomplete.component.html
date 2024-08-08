@@ -1,17 +1,20 @@
-<div class="autocomplete-container">
+<div class="autocomplete">
     <nctv-input
         [control]="control"
         [placeholder]="placeholder()"
         [label]="label()"
-        (focus)="showOptions = true"
-        (blur)="showOptions = false"
-        [for]="autocomplete"
+        [iconLeft]="iconLeft()"
+        [iconRight]="iconRight()"
+        [rotating]="rotating()"
+        [for]="for()"
+        (focused)="onFocus()"
+        (blurred)="onBlur()"
     ></nctv-input>
 
-    @if (showOptions) {
-        <div class="options-container">
-            @for (option of filteredOptions; track option) {
-                <div class="option" (mousedown)="selectOption(option)">
+    @if (isVisible()) {
+        <div class="autocomplete__options" [class.autocomplete__options--visible]="showOptions()">
+            @for (option of filteredOptions(); track option) {
+                <div class="autocomplete__option" (mousedown)="selectOption(option)">
                     {{ option.label }}
                 </div>
             }

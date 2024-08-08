@@ -8,6 +8,7 @@
     width: 100%;
 
     &__wrapper {
+        background: #fff;
         border-radius: 4px;
         border: 1px solid $color-gray-9;
         box-shadow: $shadow-1;
@@ -25,11 +26,20 @@
         align-items: center;
         position: relative;
         gap: $base-padding-xs;
+        z-index: 1000;
 
         .icon-left,
         .icon-right {
             transition: filter 0.3s ease;
             filter: grayscale(100%);
+        }
+
+        .rotating {
+            transform: rotate(0deg);
+        }
+
+        .icon-right {
+            transition: transform 0.3s ease-in-out;
         }
 
         &:focus-within {
@@ -39,6 +49,14 @@
             .icon-left,
             .icon-right {
                 filter: grayscale(0%);
+            }
+
+            .icon-right {
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .rotating {
+                transform: rotate(-180deg);
             }
         }
 

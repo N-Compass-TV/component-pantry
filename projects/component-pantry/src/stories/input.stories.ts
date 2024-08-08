@@ -1,7 +1,7 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../lib/components/card';
-import { INPUT_SIZE, InputComponent } from '../lib/components/input';
+import { INPUT_SIZE, INPUT_TYPE, InputComponent, InputSize, InputType } from '../lib/components/input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const meta: Meta<InputComponent> = {
@@ -53,8 +53,9 @@ const meta: Meta<InputComponent> = {
             },
         },
         inputType: {
-            control: 'text',
+            control: 'select',
             description: 'Type of the input element.',
+            options: INPUT_TYPE,
             table: {
                 defaultValue: {
                     summary: 'text',
@@ -115,8 +116,8 @@ const commonArgs = {
     for: 'for',
     label: 'Input Label',
     placeholder: 'Default Input Placeholder',
-    inputSize: 'medium' as const,
-    inputType: 'email',
+    inputSize: 'medium' as InputSize,
+    inputType: 'email' as InputType,
     disabled: false,
     required: false,
     invalidLabel: 'This field is required*',
