@@ -1,306 +1,194 @@
+// autocomplete.component.ts
+import { Component, type ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-    Component,
-    OnInit,
-    ElementRef,
-    ChangeDetectorRef,
-    HostListener,
-    computed,
-    effect,
-    input,
-    viewChild,
-    viewChildren,
-} from '@angular/core';
-import { Subject } from 'rxjs';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from '../input';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AutocompleteOption } from '../autocomplete';
 
 @Component({
     selector: 'nctv-autocomplete',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ReactiveFormsModule, InputComponent],
     templateUrl: './autocomplete.component.html',
     styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent {
     /**
-     * ID for the associated input element. Used for accessibility purposes.
+     * List of autocomplete options.
      */
-    for = input<string>('for');
-
-    /**
-     * Data source for the autocomplete suggestions. Expected to be an array of objects.
-     */
-    autocompleteData = input<any[]>([]);
+    options = input<AutocompleteOption[]>([]);
 
     /**
-     * SVG icon displayed to the left of the input field. Expected to be a valid SVG string.
+     * Placeholder text for the input field.
      */
-    leftIconSvg = input<string | null>(null);
+    placeholder = input<string>('');
 
     /**
-     * SVG icon displayed to the right of the input field. Expected to be a valid SVG string.
+     * Label for the input field.
      */
-    rightIconSvg = input<string | null>(null);
+    label = input<string>('');
 
     /**
-     * Flag indicating whether to show the left icon.
+     * ID for the input field.
      */
-    showLeftIcon = computed(() => !!this.leftIconSvg());
+    for = input<string>('');
 
     /**
-     * Flag indicating whether to show the right icon.
+     * Left icon in the input field.
      */
-    showRightIcon = computed(() => !!this.rightIconSvg());
+    iconLeft = input<string>('');
 
     /**
-     * Label text for the autocomplete component. Displayed above the input field.
+     * Right icon in the input field.
      */
-    label = input<string>('Default Label');
+    iconRight = input<string>(
+        'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjYiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA5IDYiPjxwYXRoIHN0cm9rZT0iIzhEQ0IyQyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0ibTEgMSAzLjUgMy41TDggMSIvPjwvc3ZnPg==',
+    );
 
     /**
-     * Placeholder text for the input field. Displayed when the input is empty.
+     * Boolean indicating if the icon should rotate.
      */
-    placeholder = input<string>('Default Placeholder');
+    rotating = input<boolean>(false);
 
     /**
-     * Size of the input field. Accepted values are 'small', 'medium', 'large'.
+     * Event emitted when an option is selected.
      */
-    inputSize = input<string>('medium');
+    optionSelected = output<AutocompleteOption>();
 
     /**
-     * Title text for the autocomplete component. Displayed as a tooltip or heading.
+     * Event emitted when the input value changes.
      */
-    title = input<string>('Default Title');
+    inputChanged = output<string>();
 
     /**
-     * Reference to the dropdown wrapper element. Used to control the visibility and positioning of the dropdown.
+     * Form control for the input field.
      */
-    dropdownWrapper = viewChild<ElementRef<HTMLDivElement>>('dropdownWrapper');
+    control = new FormControl('');
 
     /**
-     * Reference to the search input element. Used to handle focus and input events.
+     * Filtered list of autocomplete options.
      */
-    searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+    filteredOptions = signal<AutocompleteOption[]>([]);
 
     /**
-     * Flag indicating whether the label should be displayed.
+     * Boolean indicating if the options should be shown.
      */
-    hasLabel = computed(() => !!this.label().trim().length);
+    showOptions = signal(false);
 
     /**
-     * Flag indicating whether the dropdown is currently active (visible).
+     * Boolean indicating if the input field is focused.
      */
-    isActive = false;
+    isFocused = signal(false);
 
     /**
-     * Sanitized version of the left icon SVG to prevent XSS attacks.
+     * Boolean indicating if the component is visible.
      */
-    sanitizedLeftIconSvg: SafeHtml | null = null;
+    isVisible = signal(false);
 
     /**
-     * Sanitized version of the right icon SVG to prevent XSS attacks.
+     * Boolean indicating if there are no search results.
      */
-    sanitizedRightIconSvg: SafeHtml | null = null;
+    noResults = signal(false);
 
-    /**
-     * Currently selected option from the autocomplete suggestions.
-     */
-    selectedOption: any;
+    selectedIndex = signal(-1);
 
-    /**
-     * Filtered list of autocomplete suggestions based on the search input.
-     */
-    filteredData: any[] = [];
+    inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-    /**
-     * Subject to handle debounce of search input changes.
-     */
-    searchSubject = new Subject<string>();
-
-    /**
-     * Flag indicating whether to show the input field.
-     */
-    showInput = true;
-
-    /**
-     * Subject to handle changes in the search input value.
-     */
-    searchInputChanges$ = new Subject<string>();
-
-    constructor(
-        private sanitizer: DomSanitizer,
-        private cdr: ChangeDetectorRef,
-    ) {
-        // Reactive effect to sanitize SVG icons whenever they change
-        effect(() => {
-            this.sanitizeSvgIcons();
-        });
-    }
-
-    ngOnInit() {
-        this.filteredData = this.autocompleteData();
-        this.searchSubject.pipe(debounceTime(100)).subscribe({
-            next: (searchText: string) => {
-                this.filteredData = this.autocompleteData().filter((option) =>
-                    option.name.toLowerCase().includes(searchText.toLowerCase()),
-                );
-            },
-        });
-
-        this.searchInputChanges$.pipe(debounceTime(100), distinctUntilChanged()).subscribe({
-            next: (searchText: string) => {
-                this.isActive = true;
-                this.handleSearch(searchText);
-            },
+    constructor() {
+        this.control.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe((value) => {
+            this.filterOptions(value || '');
+            this.inputChanged.emit(value || '');
         });
     }
 
     /**
-     * HostListener for detecting clicks outside the component to close the dropdown.
-     * @param targetElement The element that was clicked.
+     * Filters the options based on the input value.
+     * @param value - The current value of the input field.
      */
-    @HostListener('document:click', ['$event.target'])
-    public onClickOutside(targetElement: any): void {
-        const dropdownWrapper = this.dropdownWrapper();
-        const searchInput = this.searchInput();
-        const clickedInside =
-            (dropdownWrapper && dropdownWrapper.nativeElement.contains(targetElement)) ||
-            (searchInput && searchInput.nativeElement.contains(targetElement));
-
-        if (!clickedInside && this.isActive) {
-            this.isActive = false;
-
-            // Reset the input and show it again only if there's no selected option.
-            if (!this.selectedOption) {
-                this.showInput = true;
-                this.attachInputEventListener(); // Ensure the event listener is re-attached.
-
-                // Clear the input value after the view is updated and trigger input event.
-                setTimeout(() => {
-                    if (searchInput && searchInput.nativeElement) {
-                        searchInput.nativeElement.value = '';
-                        searchInput.nativeElement.dispatchEvent(new Event('input'));
-                    }
-                });
-            } else {
-                // Dropdown is being closed with a selected option.
-                this.toggleDropdown();
-            }
-        }
+    filterOptions(value: string) {
+        const filterValue = value.toLowerCase();
+        this.filteredOptions.set(
+            this.options().filter(
+                (option) =>
+                    option.label.toLowerCase().includes(filterValue) ||
+                    option.value.toLowerCase().includes(filterValue),
+            ),
+        );
+        this.noResults.set(this.filteredOptions().length === 0);
+        this.showOptions.set((this.filteredOptions().length > 0 || this.noResults()) && this.isFocused());
     }
 
     /**
-     * HostListener for detecting the escape key press to close the dropdown.
-     * @param event The keyboard event.
+     * Selects an option from the autocomplete list.
+     * @param option - The selected autocomplete option.
      */
-    @HostListener('window:keydown.escape', ['$event'])
-    public onEscapeKeydown(event: KeyboardEvent): void {
-        if (this.isActive) {
-            this.isActive = false;
-            if (!this.selectedOption) {
-                this.showInput = true;
-                this.attachInputEventListener();
+    selectOption(option: AutocompleteOption) {
+        this.control.setValue(option.label);
+        this.showOptions.set(false);
+        this.optionSelected.emit(option);
+        this.selectedIndex.set(-1); // Reset the selected index
 
-                setTimeout(() => {
-                    const searchInput = this.searchInput();
-                    if (searchInput && searchInput.nativeElement) {
-                        searchInput.nativeElement.value = '';
-                        searchInput.nativeElement.dispatchEvent(new Event('input'));
-                    }
-                });
-            } else {
-                this.toggleDropdown();
-            }
-        }
-    }
-
-    /**
-     * Handles the selection of an option from the autocomplete suggestions.
-     * @param option The selected option.
-     */
-    public optionSelect(option: any): void {
-        this.selectedOption = option;
-        this.showInput = false;
-        this.isActive = false;
-        this.toggleDropdown();
-        this.filteredData = this.autocompleteData();
-    }
-
-    /**
-     * Clears the current selection and resets the input field.
-     */
-    public clearSelection(): void {
-        this.selectedOption = null;
-        this.showInput = true;
-        this.filteredData = this.autocompleteData();
-
-        // Clear input and trigger search AFTER the view is updated
+        // Remove focus from the input
         setTimeout(() => {
-            this.attachInputEventListener();
-            const searchInput = this.searchInput();
-            if (searchInput && searchInput.nativeElement) {
-                searchInput.nativeElement.value = '';
-                searchInput.nativeElement.dispatchEvent(new Event('input'));
+            this.inputElement()?.nativeElement.blur();
+        });
+    }
+
+    scrollToSelectedOption() {
+        setTimeout(() => {
+            const selectedElement = document.querySelector('.autocomplete__option--selected');
+            if (selectedElement) {
+                selectedElement.scrollIntoView({ block: 'nearest', inline: 'start' });
             }
-        }, 0);
+        });
     }
 
     /**
-     * Attaches an event listener to the input field for handling input events.
+     * Handles focus event on the input field.
      */
-    private attachInputEventListener(): void {
-        const searchInput = this.searchInput();
-        if (searchInput && searchInput.nativeElement && !searchInput.nativeElement.hasAttribute('listenerAttached')) {
-            searchInput.nativeElement.addEventListener('input', (event: any) => {
-                this.searchInputChanges$.next(event.target.value);
-            });
-            searchInput.nativeElement.setAttribute('listenerAttached', 'true'); // Mark listener as attached
+    onFocus() {
+        this.isFocused.set(true);
+        this.showOptions.set(true);
+        this.isVisible.set(true);
+        this.selectedIndex.set(-1);
+        this.filterOptions(this.control.value || '');
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        if (this.showOptions()) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    event.preventDefault();
+                    this.selectedIndex.update((index) => (index > 0 ? index - 1 : this.filteredOptions().length - 1));
+                    this.scrollToSelectedOption();
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    this.selectedIndex.update((index) => (index < this.filteredOptions().length - 1 ? index + 1 : 0));
+                    this.scrollToSelectedOption();
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    if (this.selectedIndex() >= 0) {
+                        this.selectOption(this.filteredOptions()[this.selectedIndex()]);
+                    } else {
+                        // If no option is selected, blur the input
+                        this.inputElement()?.nativeElement.blur();
+                    }
+                    break;
+            }
         }
     }
 
     /**
-     * Handles the search logic for filtering the autocomplete suggestions.
-     * @param searchText The text to search for.
+     * Handles blur event on the input field.
      */
-    public handleSearch(searchText: string): void {
-        this.searchSubject.next(searchText);
-    }
-
-    /**
-     * Toggles the visibility of the dropdown.
-     */
-    public toggleDropdown(): void {
-        const dropdownElement = this.dropdownWrapper()?.nativeElement;
-        if (dropdownElement) {
-            dropdownElement.classList.toggle('active', this.isActive);
-            dropdownElement.classList.toggle('inactive', !this.isActive);
-        }
-    }
-
-    /**
-     * Sanitizes the SVG content for the left and right icons to prevent XSS attacks.
-     */
-    private sanitizeSvgIcons(): void {
-        const leftIconSvg = this.leftIconSvg();
-        const rightIconSvg = this.rightIconSvg();
-
-        if (leftIconSvg) {
-            this.sanitizedLeftIconSvg = this.sanitizer.bypassSecurityTrustHtml(leftIconSvg);
-        }
-        if (rightIconSvg) {
-            this.sanitizedRightIconSvg = this.sanitizer.bypassSecurityTrustHtml(rightIconSvg);
-        }
-    }
-
-    /**
-     * Generates class names based on the input size.
-     * Constructs an object suitable for ngClass based on `inputSize`.
-     * @returns {Object} Object with dynamic class names
-     */
-    public getClass(): object {
-        return {
-            [`input--${this.inputSize()}`]: this.inputSize(),
-        };
+    onBlur() {
+        this.isFocused.set(false);
+        this.showOptions.set(false);
+        setTimeout(() => {
+            this.isVisible.set(false);
+        }, 300); // Match this to the animation duration
     }
 }

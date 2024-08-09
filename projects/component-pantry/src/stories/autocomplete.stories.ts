@@ -1,154 +1,198 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from '../lib/components/card';
-import { AUTOCOMPLETE_INPUT_SIZE, AutocompleteComponent } from '../lib/components/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '../lib/components/input';
-import { ButtonComponent } from '../public-api';
+import { AutocompleteComponent } from '../lib/components/autocomplete';
+import { CardComponent } from '../lib/components/card';
 
 const meta: Meta<AutocompleteComponent> = {
     title: 'Components/Autocomplete',
     component: AutocompleteComponent,
     decorators: [
         moduleMetadata({
-            imports: [CommonModule, CardComponent, InputComponent, ButtonComponent],
+            imports: [CommonModule, ReactiveFormsModule, InputComponent, CardComponent],
         }),
     ],
     tags: ['autodocs'],
     parameters: {},
     argTypes: {
-        inputSize: {
-            control: 'select',
-            description: 'Used to set input size.',
-            options: AUTOCOMPLETE_INPUT_SIZE,
-            table: {
-                defaultValue: {
-                    summary: 'medium',
-                },
-            },
+        options: {
+            control: 'object',
+            description: 'Array of option objects for autocomplete',
         },
-        leftIconSvg: {
-            control: {
-                type: 'text', // Use the 'text' control for SVG input
-                // Optional, but recommended for a better UX:
-                labels: {
-                    control: 'Left Icon SVG',
-                    description: 'Input the SVG code for the left icon.',
-                },
-            },
+        placeholder: {
+            control: 'text',
+            description: 'Placeholder text for the input',
         },
-        rightIconSvg: {
-            control: {
-                type: 'text',
-                // Optional labels for better UX:
-                labels: {
-                    control: 'Right Icon SVG',
-                    description: 'Input the SVG code for the right icon.',
-                },
-            },
+        label: {
+            control: 'text',
+            description: 'Label for the autocomplete input',
+        },
+        rotating: {
+            control: 'boolean',
+            description: 'Enables rotating animation for the right-icon (For dropdown)',
+        },
+        iconLeft: {
+            control: 'text',
+            description: 'Base64 encoded SVG for the left icon.',
+        },
+        iconRight: {
+            control: 'text',
+            description: 'Base64 encoded SVG for the right icon.',
+        },
+        for: {
+            control: 'text',
+            description: 'Name of the form field (Unique - sets value of id and for label)',
         },
     },
 };
-
-const dummyDataCountry = [
-    { id: 'abc123', name: 'Afghanistan', code: 'AF' },
-    { id: 'def456', name: 'Åland Islands', code: 'AX' },
-    { id: 'ghi789', name: 'Albania', code: 'AL' },
-    { id: 'jkl012', name: 'Algeria', code: 'DZ' },
-    { id: 'mno345', name: 'American Samoa', code: 'AS' },
-    { id: 'pqr678', name: 'AndorrA', code: 'AD' },
-];
 
 export default meta;
 type Story = StoryObj<AutocompleteComponent>;
 
+const dummyData = [
+    { id: '1', label: 'Lion', value: 'lion' },
+    { id: '2', label: 'Tiger', value: 'tiger' },
+    { id: '3', label: 'Elephant', value: 'elephant' },
+    { id: '4', label: 'Giraffe', value: 'giraffe' },
+    { id: '5', label: 'Zebra', value: 'zebra' },
+    { id: '6', label: 'Cheetah', value: 'cheetah' },
+    { id: '7', label: 'Rhinoceros', value: 'rhinoceros' },
+    { id: '8', label: 'Hippopotamus', value: 'hippopotamus' },
+    { id: '9', label: 'Gorilla', value: 'gorilla' },
+    { id: '10', label: 'Chimpanzee', value: 'chimpanzee' },
+    { id: '11', label: 'Leopard', value: 'leopard' },
+    { id: '12', label: 'Gazelle', value: 'gazelle' },
+    { id: '13', label: 'Hyena', value: 'hyena' },
+    { id: '14', label: 'Crocodile', value: 'crocodile' },
+    { id: '15', label: 'Ostrich', value: 'ostrich' },
+    { id: '16', label: 'Kangaroo', value: 'kangaroo' },
+    { id: '17', label: 'Koala', value: 'koala' },
+    { id: '18', label: 'Panda', value: 'panda' },
+    { id: '19', label: 'Penguin', value: 'penguin' },
+    { id: '20', label: 'Sloth', value: 'sloth' },
+    { id: '21', label: 'Orangutan', value: 'orangutan' },
+    { id: '22', label: 'Polar Bear', value: 'polar_bear' },
+    { id: '23', label: 'Grizzly Bear', value: 'grizzly_bear' },
+    { id: '24', label: 'Wolf', value: 'wolf' },
+    { id: '25', label: 'Fox', value: 'fox' },
+    { id: '26', label: 'Jaguar', value: 'jaguar' },
+    { id: '27', label: 'Panther', value: 'panther' },
+    { id: '28', label: 'Lemur', value: 'lemur' },
+    { id: '29', label: 'Meerkat', value: 'meerkat' },
+    { id: '30', label: 'Armadillo', value: 'armadillo' },
+    { id: '31', label: 'Platypus', value: 'platypus' },
+    { id: '32', label: 'Tasmanian Devil', value: 'tasmanian_devil' },
+    { id: '33', label: 'Komodo Dragon', value: 'komodo_dragon' },
+    { id: '34', label: 'Camel', value: 'camel' },
+    { id: '35', label: 'Llama', value: 'llama' },
+    { id: '36', label: 'Alpaca', value: 'alpaca' },
+    { id: '37', label: 'Bison', value: 'bison' },
+    { id: '38', label: 'Moose', value: 'moose' },
+    { id: '39', label: 'Elk', value: 'elk' },
+    { id: '40', label: 'Warthog', value: 'warthog' },
+    { id: '41', label: 'Wildebeest', value: 'wildebeest' },
+    { id: '42', label: 'Baboon', value: 'baboon' },
+    { id: '43', label: 'Capybara', value: 'capybara' },
+    { id: '44', label: 'Tapir', value: 'tapir' },
+    { id: '45', label: 'Red Panda', value: 'red_panda' },
+];
+
 export const Basic: Story = {
     args: {
-        inputSize: 'medium',
-        label: 'Autocomplete Field (Dynamic)',
-        placeholder: 'Search Keyword',
-        autocompleteData: dummyDataCountry,
-        leftIconSvg: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px">
-            <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>`,
-        rightIconSvg: `<svg width="15" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          clip-rule="evenodd"
-          d="M9.53033 9.28033C9.23744 9.57322 8.76256 9.57322 8.46967 9.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.719671C1.26256 0.426777 1.73744 0.426777 2.03033 0.719671L9 7.68934L15.9697 0.71967C16.2626 0.426777 16.7374 0.426777 17.0303 0.71967C17.3232 1.01256 17.3232 1.48744 17.0303 1.78033L9.53033 9.28033Z"
-        >
-        </path>
-      </svg>`,
+        options: dummyData,
+        placeholder: 'Search Animal',
+        label: 'Country',
+        iconLeft:
+            'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBzdHJva2U9IiM4RENCMkMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Im0xOSAxOS01LjE5Ny01LjE5N20wIDBBNy41IDcuNSAwIDEgMCAzLjE5NiAzLjE5NmE3LjUgNy41IDAgMCAwIDEwLjYwNyAxMC42MDdaIi8+PC9zdmc+',
+        rotating: true,
+        for: 'Country',
     },
     render: (args) => ({
-        props: args,
+        props: {
+            ...args,
+            onOptionSelected: (option: any) => console.log('Selected:', option),
+            onInputChanged: (value: string) => console.log('Input changed:', value),
+        },
         template: `
-            <nctv-card [shadowLevel]="shadowLevel" [cardSize]="'100%'">
-                <nctv-autocomplete
-                    [inputSize]="inputSize"
-                    [label]="label"
-                    [placeholder]="placeholder"
-                    [autocompleteData]="autocompleteData"
-                    [leftIconSvg]="leftIconSvg"
-                    [rightIconSvg]="rightIconSvg"
-                >
-                </nctv-autocomplete>
-            </nctv-card>
-        `,
+      <nctv-autocomplete
+        [options]="options"
+        [placeholder]="placeholder"
+        [label]="label"
+        [rotating]="rotating"
+        [iconLeft]="iconLeft"
+        [for]="for"
+        (optionSelected)="onOptionSelected($event)"
+        (inputChanged)="onInputChanged($event)"
+      ></nctv-autocomplete>
+    `,
     }),
 };
 
-export const DemoAutocomplete: Story = {
+export const WithCard: Story = {
     args: {
-        inputSize: 'medium',
-        label: 'Autocomplete Field (Dynamic)',
-        placeholder: 'Autocomplete Field Placeholder (Dynamic)',
-        autocompleteData: dummyDataCountry,
+        options: dummyData,
+        placeholder: 'Search country',
+        label: 'Country',
     },
     render: (args) => ({
-        props: args,
+        props: {
+            ...args,
+            onOptionSelected: (option: any) => console.log('Selected:', option),
+            onInputChanged: (value: string) => console.log('Input changed:', value),
+        },
         template: `
-            <nctv-card [shadowLevel]="shadowLevel">
-              <div style="display: flex; gap: 20px;">
-                <nctv-autocomplete [inputSize]="inputSize" style="width: 100%;" [placeholder]="placeholder" [autocompleteData]="autocompleteData">
-                </nctv-autocomplete>
-
-                <nctv-autocomplete [inputSize]="inputSize" style="width: 100%;" [label]="'Second autocomplete (Static)'" [placeholder]="'Select animal (Static)'" [autocompleteData]="[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]">
-                </nctv-autocomplete>
-              </div>
-            </nctv-card>
-        `,
+      <nctv-card [shadowLevel]="2" [cardWidth]="'100%'">
+        <nctv-autocomplete
+          [options]="options"
+          [placeholder]="placeholder"
+          [label]="label"
+          (optionSelected)="onOptionSelected($event)"
+          (inputChanged)="onInputChanged($event)"
+        ></nctv-autocomplete>
+      </nctv-card>
+    `,
     }),
 };
 
 export const MultipleAutocomplete: Story = {
-    args: {
-        inputSize: 'small',
-        label: 'Autocomplete Field (Dynamic)',
-        placeholder: 'Autocomplete Field Placeholder (Dynamic)',
-        autocompleteData: dummyDataCountry,
-    },
+    args: {},
     render: (args) => ({
-        props: args,
+        props: {
+            ...args,
+            countryOptions: dummyData,
+            animalOptions: [
+                { id: '1', label: 'Lion', value: 'lion' },
+                { id: '2', label: 'Tiger', value: 'tiger' },
+                { id: '3', label: 'Elephant', value: 'elephant' },
+                { id: '4', label: 'Giraffe', value: 'giraffe' },
+                { id: '5', label: 'Zebra', value: 'zebra' },
+            ],
+            onCountrySelected: (option: any) => console.log('Country selected:', option),
+            onAnimalSelected: (option: any) => console.log('Animal selected:', option),
+            onCountryInputChanged: (value: string) => console.log('Country input changed:', value),
+            onAnimalInputChanged: (value: string) => console.log('Animal input changed:', value),
+        },
         template: `
-        <nctv-card [shadowLevel]="shadowLevel">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <nctv-autocomplete [inputSize]="inputSize" [label]="label" [placeholder]="placeholder" [autocompleteData]="autocompleteData">
-                </nctv-autocomplete>
+      <nctv-card [shadowLevel]="2">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+          <nctv-autocomplete
+            [options]="countryOptions"
+            placeholder="Search country"
+            label="Country"
+            (optionSelected)="onCountrySelected($event)"
+            (inputChanged)="onCountryInputChanged($event)"
+          ></nctv-autocomplete>
 
-                <nctv-input [label]="label" [inputSize]="inputSize" [placeholder]="placeholder"></nctv-input>
-
-                <nctv-input [label]="'I am a label (Static)'" [inputSize]="inputSize" [placeholder]="'I am a placeholder (Static)'"></nctv-input>
-
-                <nctv-input [label]="label" [inputSize]="inputSize" [placeholder]="placeholder"></nctv-input>
-
-                <nctv-autocomplete [inputSize]="inputSize" [label]="'Second autocomplete (Static)'" [placeholder]="'Select animal (Static)'" [autocompleteData]="[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]">
-                </nctv-autocomplete>
-
-                <nctv-input [label]="'I am a label (Static)'" [inputSize]="inputSize" [placeholder]="'I am a placeholder (Static)'"></nctv-input>
-
-                <nctv-autocomplete [inputSize]="inputSize" [label]="'Second autocomplete (Static)'" [placeholder]="'Select animal (Static)'" [autocompleteData]="[{id: '1', name: 'Lion', species: 'Panthera leo'}, {id: '2', name: 'Tiger', species: 'Panthera tigris'}, {id: '3', name: 'Elephant', species: 'Loxodonta'}, {id: '4', name: 'Giraffe', species: 'Giraffa camelopardalis'}, {id: '5', name: 'Zebra', species: 'Equus zebra'}]">
-                </nctv-autocomplete>
-            </div>
-        </nctv-card>
-        `,
+          <nctv-autocomplete
+            [options]="animalOptions"
+            placeholder="Search animal"
+            label="Animal"
+            (optionSelected)="onAnimalSelected($event)"
+            (inputChanged)="onAnimalInputChanged($event)"
+          ></nctv-autocomplete>
+        </div>
+      </nctv-card>
+    `,
     }),
 };

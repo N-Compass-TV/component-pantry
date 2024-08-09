@@ -82,7 +82,7 @@ export const Basic: Story = {
         template: `
         <ng-container>
             <div *ngIf="orientation === 'vertical'; else horizontalOrientation" style="height: 500px;">
-                <nctv-card [cardSize]="'fit-content'" [backgroundColor]="'#091635'">
+                <nctv-card [cardHeight]="'100%'" [cardWidth]="'fit-content'" [backgroundColor]="'#091635'">
                     <div style="display: flex; gap: 10px; height: 100%; flex-direction: column; align-items:center;">
                         <svg width="198" height="33" viewBox="0 0 198 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.64256 11.7726V22.3679C3.64256 22.3679 3.64256 23.676 2.2037 23.676C0.764832 23.676 0.764832 22.3679 0.764832 22.3679V10.0722C0.764832 8.76411 1.68047 8.6333 2.2037 8.6333H13.1914C15.1535 8.6333 17.3772 10.7262 17.3772 12.6883V22.3679C17.3772 22.3679 17.3772 23.676 15.9383 23.676C14.4994 23.676 14.3686 22.3679 14.3686 22.3679V13.2115C14.3686 12.9499 13.8454 11.7726 12.5374 11.7726H3.64256Z" fill="white"/>
@@ -205,7 +205,7 @@ export const Vertical: Story = {
         },
         template: `
         <div style="height: 500px;">
-        <nctv-card [cardSize]="'fit-content'" [backgroundColor]="'#091635'">
+        <nctv-card [cardHeight]="'100%'" [cardWidth]="'fit-content'" [backgroundColor]="'#091635'">
             <div style="display: flex; gap: 10px; height: 100%; flex-direction: column; align-items:center;">
                 
 

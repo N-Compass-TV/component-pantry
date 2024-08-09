@@ -39,45 +39,43 @@ $color-green-11: #45650d !default;
 $color-green-12: #26360a !default;
 
 // Theme Shadows
-$shadow-1: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
-
+$shadow-1:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
 $shadow-2:
-    0 3px 6px rgba(0, 0, 0, 0.16),
-    0 3px 6px rgba(0, 0, 0, 0.23);
-
+    0 3px 6px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.12);
 $shadow-3:
-    0 10px 20px rgba(0, 0, 0, 0.19),
-    0 6px 6px rgba(0, 0, 0, 0.23);
-
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1);
 $shadow-4:
     0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
-
 $shadow-5:
     0 19px 38px rgba(0, 0, 0, 0.3),
     0 15px 12px rgba(0, 0, 0, 0.22);
 
-$input-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.05);
+$input-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 // Define base padding and font size
 
-$base-padding-xs: 5px !default;
-$base-padding-sm: 10px !default;
-$base-padding-lg: 20px !default;
-$base-padding-xlg: 30px !default;
-$base-font-size: 14px !default;
+$base-padding-xs: 0.357em;
+$base-padding-sm: 0.714em;
+$base-padding-lg: 1.429em;
+$base-padding-xlg: 2.143em;
+$base-font-size: 1em;
 
 // Font Sizes
-$h1: 40px;
-$h2: 32px;
-$h3: 28px;
-$h4: 24px;
-$h5: 20px;
-$h6: 18px;
-$lg: 16px;
-$md: 14px;
-$sm: 12px;
-$xs: 10px;
+$h1: 2.5rem;
+$h2: 2rem;
+$h3: 1.75rem;
+$h4: 1.5rem;
+$h5: 1.25rem;
+$h6: 1.125rem;
+$lg: 1rem;
+$md: 0.875rem;
+$sm: 0.75rem;
+$xs: 0.625rem;
 
 // Line Height
 $line-height-sm: 24px !default;

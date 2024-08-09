@@ -67,6 +67,42 @@ const meta: Meta<ButtonComponent> = {
                 defaultValue: { summary: 'button' },
             },
         },
+        loading: {
+            control: 'boolean',
+            description: 'Indicates whether the button is in a loading state.',
+            table: {
+                defaultValue: {
+                    summary: 'false',
+                },
+            },
+        },
+        loadingLabel: {
+            control: 'text',
+            description: 'The text to display when the button is in a loading state.',
+            table: {
+                defaultValue: {
+                    summary: 'Loading...',
+                },
+            },
+        },
+        loadingLeft: {
+            control: 'boolean',
+            description: 'Indicates whether to show the loading spinner on the left side.',
+            table: {
+                defaultValue: {
+                    summary: 'false',
+                },
+            },
+        },
+        loadingRight: {
+            control: 'boolean',
+            description: 'Indicates whether to show the loading spinner on the right side.',
+            table: {
+                defaultValue: {
+                    summary: 'false',
+                },
+            },
+        },
     },
     args: {},
 };
@@ -77,6 +113,9 @@ type Story = StoryObj<ButtonComponent>;
 export const Primary: Story = {
     args: {
         buttonStyle: 'primary',
+        label: 'Primary Button',
+        iconRight:
+            'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE4IDE0Ij48cGF0aCBmaWxsPSIjOERDQjJDIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjUgMTRhNC41IDQuNSAwIDAgMS0xLjQ0LTguNzY1IDQuNSA0LjUgMCAwIDEgOC4zMDItMy4wNDYgMy41IDMuNSAwIDAgMSA0LjUwNCA0LjI3MkE0IDQgMCAwIDEgMTQgMTRINC41Wm01LjI1LTkuMjVhLjc1Ljc1IDAgMCAwLTEuNSAwdjQuNTlMNi4zIDcuMjRhLjc1Ljc1IDAgMSAwLTEuMSAxLjAybDMuMjUgMy41YS43NS43NSAwIDAgMCAxLjEgMGwzLjI1LTMuNWEuNzUuNzUgMCAwIDAtMS4xLTEuMDJsLTEuOTUgMi4xVjQuNzVaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=',
     },
 };
 
@@ -99,5 +138,25 @@ export const Danger: Story = {
     args: {
         label: 'Delete',
         buttonStyle: 'danger',
+    },
+};
+
+export const LoadingLeft: Story = {
+    args: {
+        label: 'Submit',
+        loading: true,
+        loadingLabel: 'Submitting...',
+        loadingLeft: true,
+        buttonStyle: 'primary',
+    },
+};
+
+export const LoadingRight: Story = {
+    args: {
+        label: 'Submit',
+        loading: true,
+        loadingLabel: 'Submitting...',
+        loadingRight: true,
+        buttonStyle: 'primary',
     },
 };

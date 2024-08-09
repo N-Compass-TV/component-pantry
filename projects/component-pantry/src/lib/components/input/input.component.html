@@ -2,13 +2,38 @@
     @if (label()) {
         <label [for]="for()">{{ label() }}</label>
     }
-    <input
-        [ngClass]="getClass()"
-        [type]="inputType()"
-        [placeholder]="placeholder()"
-        [formControl]="control()"
-        [class.invalid]="isInvalid()"
-    />
+    <div class="input__wrapper" [class.invalid]="isInvalid()">
+        @if (loadingLeft()) {
+            <div class="spinner spinner-left"></div>
+        } @else if (iconLeft()) {
+            <img
+                [src]="'data:image/svg+xml;base64,' + iconLeft()"
+                alt="Left icon"
+                class="icon-left"
+                [class.disabled]="isDisabled()"
+            />
+        }
+        <input
+            [id]="for()"
+            [ngClass]="getClass()"
+            [type]="inputType()"
+            [placeholder]="placeholder()"
+            [formControl]="control()"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+        />
+        @if (loadingRight()) {
+            <div class="spinner spinner-right"></div>
+        } @else if (iconRight()) {
+            <img
+                [src]="'data:image/svg+xml;base64,' + iconRight()"
+                alt="Right icon"
+                class="icon-right"
+                [class.disabled]="isDisabled()"
+                [class.rotating]="rotating()"
+            />
+        }
+    </div>
     @if (shouldShowInvalidLabel()) {
         <span class="invalid__label">{{ invalidLabel() }}</span>
     }

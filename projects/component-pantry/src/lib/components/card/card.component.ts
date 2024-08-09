@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { CardShadows } from './card';
+import { CardShadows, CardWidth, CardHeight } from './card';
 
 @Component({
     selector: 'nctv-card',
@@ -24,18 +24,61 @@ export class CardComponent {
     backgroundColor = input<string>('#ffffff');
 
     /**
-     * Specifies the side padding of the card in pixels. This padding is applied on the left and right sides of the card.
-     * The default value is 25 pixels.
+     * Specifies the side padding of the card in rem. This padding is applied on all sides of the card.
+     * The default value is 1rem.
      * It determines the spacing between the card's content and its edges.
      */
     sidePadding = input<number>(1);
 
-    cardSize = input<string>('auto');
+    /**
+     * Specifies the width of the card.
+     * Possible values are 'auto', 'fit-content', or 'full'.
+     * The default value is 'auto'.
+     */
+    cardWidth = input<CardWidth>('auto');
 
     /**
-     * Generates class names based on card shadow level, if values are provided.
+     * Specifies the height of the card.
+     * Possible values are 'auto', 'fit-content', or 'full'.
+     * The default value is 'auto'.
+     */
+    cardHeight = input<CardHeight>('auto');
+
+    /**
+     * Computes the actual width to be applied to the card based on the cardWidth input.
+     */
+    computedWidth = computed(() => {
+        switch (this.cardWidth()) {
+            case 'full':
+                return '100%';
+            case 'fit-content':
+                return 'fit-content';
+            case 'auto':
+                return 'auto';
+            default:
+                return this.cardWidth(); // Return the specific value
+        }
+    });
+
+    /**
+     * Computes the actual height to be applied to the card based on the cardHeight input.
+     */
+    computedHeight = computed(() => {
+        switch (this.cardHeight()) {
+            case 'full':
+                return '100%';
+            case 'fit-content':
+                return 'fit-content';
+            case 'auto':
+                return 'auto';
+            default:
+                return this.cardHeight(); // Return the specific value
+        }
+    });
+
+    /**
+     * Generates class names based on card shadow level.
      * Constructs an object suitable for ngClass based on `shadowLevel`.
-     * Add if necessary
      * @returns {Object} Object with dynamic class names
      */
     public getClass = computed(() => {

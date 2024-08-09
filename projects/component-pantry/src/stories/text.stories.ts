@@ -77,7 +77,7 @@ export const BoldColored: Story = {
 export const CustomFontSize: Story = {
     args: {
         textContent: 'Such amaze, many font size!',
-        fontSize: 50,
+        fontSize: 4,
         textColor: '#342abd',
     },
 };
