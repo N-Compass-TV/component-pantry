@@ -40,6 +40,10 @@ const meta: Meta<AutocompleteComponent> = {
             control: 'text',
             description: 'Base64 encoded SVG for the right icon.',
         },
+        for: {
+            control: 'text',
+            description: 'Name of the form field (Unique - sets value of id and for label)',
+        },
     },
 };
 
@@ -63,6 +67,7 @@ export const Basic: Story = {
         iconLeft:
             'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBzdHJva2U9IiM4RENCMkMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Im0xOSAxOS01LjE5Ny01LjE5N20wIDBBNy41IDcuNSAwIDEgMCAzLjE5NiAzLjE5NmE3LjUgNy41IDAgMCAwIDEwLjYwNyAxMC42MDdaIi8+PC9zdmc+',
         rotating: true,
+        for: 'Country',
     },
     render: (args) => ({
         props: {
@@ -77,6 +82,7 @@ export const Basic: Story = {
         [label]="label"
         [rotating]="rotating"
         [iconLeft]="iconLeft"
+        [for]="for"
         (optionSelected)="onOptionSelected($event)"
         (inputChanged)="onInputChanged($event)"
       ></nctv-autocomplete>

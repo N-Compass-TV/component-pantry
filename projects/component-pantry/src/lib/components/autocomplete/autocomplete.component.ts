@@ -86,8 +86,13 @@ export class AutocompleteComponent {
      */
     isVisible = signal(false);
 
+    /**
+     * Boolean indicating if there are no search results.
+     */
+    noResults = signal(false);
+
     constructor() {
-        this.control.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((value) => {
+        this.control.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe((value) => {
             this.filterOptions(value || '');
             this.inputChanged.emit(value || '');
         });
@@ -106,7 +111,8 @@ export class AutocompleteComponent {
                     option.value.toLowerCase().includes(filterValue),
             ),
         );
-        this.showOptions.set(this.filteredOptions().length > 0 && this.isFocused());
+        this.noResults.set(this.filteredOptions().length === 0);
+        this.showOptions.set((this.filteredOptions().length > 0 || this.noResults()) && this.isFocused());
     }
 
     /**

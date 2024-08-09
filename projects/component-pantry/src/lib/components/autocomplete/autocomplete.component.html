@@ -13,10 +13,14 @@
 
     @if (isVisible()) {
         <div class="autocomplete__options" [class.autocomplete__options--visible]="showOptions()">
-            @for (option of filteredOptions(); track option) {
-                <div class="autocomplete__option" (mousedown)="selectOption(option)">
-                    {{ option.label }}
-                </div>
+            @if (noResults()) {
+                <div class="autocomplete__option autocomplete__option--not-found">No results found</div>
+            } @else {
+                @for (option of filteredOptions(); track option) {
+                    <div class="autocomplete__option" (mousedown)="selectOption(option)">
+                        {{ option.label }}
+                    </div>
+                }
             }
         </div>
     }

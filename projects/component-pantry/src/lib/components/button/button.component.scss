@@ -141,13 +141,13 @@
 
     &:hover:not(:disabled) {
         transform: translateY(-2px);
-        box-shadow: $shadow-2;
+        box-shadow: $shadow-3;
     }
 
     &:active:not(:disabled) {
-        transform: translateX(0);
+        transform: translateX(0) scale(0.99);
         box-shadow: $shadow-1;
-        transition: 0.05s ease-in-out;
+        transition: 0.1s ease-in-out;
     }
 
     @keyframes spin {
