@@ -50,19 +50,58 @@ const meta: Meta<AutocompleteComponent> = {
 export default meta;
 type Story = StoryObj<AutocompleteComponent>;
 
-const dummyDataCountry = [
-    { id: 'AF', label: 'Afghanistan', value: 'AF' },
-    { id: 'AX', label: 'Åland Islands', value: 'AX' },
-    { id: 'AL', label: 'Albania', value: 'AL' },
-    { id: 'DZ', label: 'Algeria', value: 'DZ' },
-    { id: 'AS', label: 'American Samoa', value: 'AS' },
-    { id: 'AD', label: 'Andorra', value: 'AD' },
+const dummyData = [
+    { id: '1', label: 'Lion', value: 'lion' },
+    { id: '2', label: 'Tiger', value: 'tiger' },
+    { id: '3', label: 'Elephant', value: 'elephant' },
+    { id: '4', label: 'Giraffe', value: 'giraffe' },
+    { id: '5', label: 'Zebra', value: 'zebra' },
+    { id: '6', label: 'Cheetah', value: 'cheetah' },
+    { id: '7', label: 'Rhinoceros', value: 'rhinoceros' },
+    { id: '8', label: 'Hippopotamus', value: 'hippopotamus' },
+    { id: '9', label: 'Gorilla', value: 'gorilla' },
+    { id: '10', label: 'Chimpanzee', value: 'chimpanzee' },
+    { id: '11', label: 'Leopard', value: 'leopard' },
+    { id: '12', label: 'Gazelle', value: 'gazelle' },
+    { id: '13', label: 'Hyena', value: 'hyena' },
+    { id: '14', label: 'Crocodile', value: 'crocodile' },
+    { id: '15', label: 'Ostrich', value: 'ostrich' },
+    { id: '16', label: 'Kangaroo', value: 'kangaroo' },
+    { id: '17', label: 'Koala', value: 'koala' },
+    { id: '18', label: 'Panda', value: 'panda' },
+    { id: '19', label: 'Penguin', value: 'penguin' },
+    { id: '20', label: 'Sloth', value: 'sloth' },
+    { id: '21', label: 'Orangutan', value: 'orangutan' },
+    { id: '22', label: 'Polar Bear', value: 'polar_bear' },
+    { id: '23', label: 'Grizzly Bear', value: 'grizzly_bear' },
+    { id: '24', label: 'Wolf', value: 'wolf' },
+    { id: '25', label: 'Fox', value: 'fox' },
+    { id: '26', label: 'Jaguar', value: 'jaguar' },
+    { id: '27', label: 'Panther', value: 'panther' },
+    { id: '28', label: 'Lemur', value: 'lemur' },
+    { id: '29', label: 'Meerkat', value: 'meerkat' },
+    { id: '30', label: 'Armadillo', value: 'armadillo' },
+    { id: '31', label: 'Platypus', value: 'platypus' },
+    { id: '32', label: 'Tasmanian Devil', value: 'tasmanian_devil' },
+    { id: '33', label: 'Komodo Dragon', value: 'komodo_dragon' },
+    { id: '34', label: 'Camel', value: 'camel' },
+    { id: '35', label: 'Llama', value: 'llama' },
+    { id: '36', label: 'Alpaca', value: 'alpaca' },
+    { id: '37', label: 'Bison', value: 'bison' },
+    { id: '38', label: 'Moose', value: 'moose' },
+    { id: '39', label: 'Elk', value: 'elk' },
+    { id: '40', label: 'Warthog', value: 'warthog' },
+    { id: '41', label: 'Wildebeest', value: 'wildebeest' },
+    { id: '42', label: 'Baboon', value: 'baboon' },
+    { id: '43', label: 'Capybara', value: 'capybara' },
+    { id: '44', label: 'Tapir', value: 'tapir' },
+    { id: '45', label: 'Red Panda', value: 'red_panda' },
 ];
 
 export const Basic: Story = {
     args: {
-        options: dummyDataCountry,
-        placeholder: 'Search country',
+        options: dummyData,
+        placeholder: 'Search Animal',
         label: 'Country',
         iconLeft:
             'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBzdHJva2U9IiM4RENCMkMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Im0xOSAxOS01LjE5Ny01LjE5N20wIDBBNy41IDcuNSAwIDEgMCAzLjE5NiAzLjE5NmE3LjUgNy41IDAgMCAwIDEwLjYwNyAxMC42MDdaIi8+PC9zdmc+',
@@ -92,7 +131,7 @@ export const Basic: Story = {
 
 export const WithCard: Story = {
     args: {
-        options: dummyDataCountry,
+        options: dummyData,
         placeholder: 'Search country',
         label: 'Country',
     },
@@ -103,7 +142,7 @@ export const WithCard: Story = {
             onInputChanged: (value: string) => console.log('Input changed:', value),
         },
         template: `
-      <nctv-card [shadowLevel]="2" [cardSize]="'100%'">
+      <nctv-card [shadowLevel]="2" [cardWidth]="'100%'">
         <nctv-autocomplete
           [options]="options"
           [placeholder]="placeholder"
@@ -121,7 +160,7 @@ export const MultipleAutocomplete: Story = {
     render: (args) => ({
         props: {
             ...args,
-            countryOptions: dummyDataCountry,
+            countryOptions: dummyData,
             animalOptions: [
                 { id: '1', label: 'Lion', value: 'lion' },
                 { id: '2', label: 'Tiger', value: 'tiger' },

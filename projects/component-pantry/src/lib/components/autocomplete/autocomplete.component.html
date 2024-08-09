@@ -9,15 +9,21 @@
         [for]="for()"
         (focused)="onFocus()"
         (blurred)="onBlur()"
+        (keydown)="onKeyDown($event)"
     ></nctv-input>
 
     @if (isVisible()) {
-        <div class="autocomplete__options" [class.autocomplete__options--visible]="showOptions()">
+        <div class="autocomplete__options" [class.autocomplete__options--visible]="showOptions()" #optionsContainer>
             @if (noResults()) {
                 <div class="autocomplete__option autocomplete__option--not-found">No results found</div>
             } @else {
-                @for (option of filteredOptions(); track option) {
-                    <div class="autocomplete__option" (mousedown)="selectOption(option)">
+                @for (option of filteredOptions(); track option; let i = $index) {
+                    <div
+                        class="autocomplete__option"
+                        [class.autocomplete__option--selected]="i === selectedIndex()"
+                        (mousedown)="selectOption(option)"
+                        (mouseover)="selectedIndex.set(i)"
+                    >
                         {{ option.label }}
                     </div>
                 }

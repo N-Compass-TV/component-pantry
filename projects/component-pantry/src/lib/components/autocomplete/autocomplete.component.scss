@@ -69,6 +69,10 @@
     }
 }
 
+.autocomplete__option--selected {
+    background-color: #f0f0f0;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

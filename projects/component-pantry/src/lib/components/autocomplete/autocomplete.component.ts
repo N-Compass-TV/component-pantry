@@ -1,5 +1,5 @@
 // autocomplete.component.ts
-import { Component, input, output, signal } from '@angular/core';
+import { Component, type ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '../input';
@@ -91,6 +91,10 @@ export class AutocompleteComponent {
      */
     noResults = signal(false);
 
+    selectedIndex = signal(-1);
+
+    inputElement = viewChild<ElementRef<HTMLInputElement>>('inputElement');
+
     constructor() {
         this.control.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe((value) => {
             this.filterOptions(value || '');
@@ -123,6 +127,21 @@ export class AutocompleteComponent {
         this.control.setValue(option.label);
         this.showOptions.set(false);
         this.optionSelected.emit(option);
+        this.selectedIndex.set(-1); // Reset the selected index
+
+        // Remove focus from the input
+        setTimeout(() => {
+            this.inputElement()?.nativeElement.blur();
+        });
+    }
+
+    scrollToSelectedOption() {
+        setTimeout(() => {
+            const selectedElement = document.querySelector('.autocomplete__option--selected');
+            if (selectedElement) {
+                selectedElement.scrollIntoView({ block: 'nearest', inline: 'start' });
+            }
+        });
     }
 
     /**
@@ -132,7 +151,34 @@ export class AutocompleteComponent {
         this.isFocused.set(true);
         this.showOptions.set(true);
         this.isVisible.set(true);
+        this.selectedIndex.set(-1);
         this.filterOptions(this.control.value || '');
+    }
+
+    onKeyDown(event: KeyboardEvent) {
+        if (this.showOptions()) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    event.preventDefault();
+                    this.selectedIndex.update((index) => (index > 0 ? index - 1 : this.filteredOptions().length - 1));
+                    this.scrollToSelectedOption();
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    this.selectedIndex.update((index) => (index < this.filteredOptions().length - 1 ? index + 1 : 0));
+                    this.scrollToSelectedOption();
+                    break;
+                case 'Enter':
+                    event.preventDefault();
+                    if (this.selectedIndex() >= 0) {
+                        this.selectOption(this.filteredOptions()[this.selectedIndex()]);
+                    } else {
+                        // If no option is selected, blur the input
+                        this.inputElement()?.nativeElement.blur();
+                    }
+                    break;
+            }
+        }
     }
 
     /**
